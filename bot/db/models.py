@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
-from db.base import Base
+from bot.db.base import Base
 
 
 users_currencies = Table(

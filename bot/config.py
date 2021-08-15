@@ -8,9 +8,11 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
-    TOKEN = os.getenv('TOKEN')
+    TOKEN: str = os.getenv('TOKEN')
 
-    CURRENCY_URL = 'https://bitinfocharts.com/ru/crypto-kurs'
+    PERCENT_CHANGE: float = float(os.getenv('PERCENT_CHANGE'))
+
+    CURRENCY_URL: HttpUrl = 'https://bitinfocharts.com/ru/crypto-kurs'
 
     SENTRY_DSN: Optional[HttpUrl]
     POSTGRES_SERVER: str = "postgres"
@@ -18,9 +20,9 @@ class Settings(BaseSettings):
     DB_USER_PASSWORD: str = "qwerty"
     POSTGRES_DB: str = "app"
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
-    SQLALCHEMY_POOL_TIMEOUT = 30
-    SQLALCHEMY_POOL_SIZE = 20
-    SQLALCHEMY_MAX_OVERFLOW = 40
+    SQLALCHEMY_POOL_TIMEOUT: int = 30
+    SQLALCHEMY_POOL_SIZE: int = 20
+    SQLALCHEMY_MAX_OVERFLOW: int = 40
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:

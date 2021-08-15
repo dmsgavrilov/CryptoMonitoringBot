@@ -33,9 +33,7 @@ config.set_main_option('sqlalchemy.url', get_url())
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-import db.models
-
-from db.base import Base
+from bot.db.base import Base
 
 target_metadata = Base.metadata
 

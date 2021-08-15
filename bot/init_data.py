@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from db.models import Currency
 from db.base import SessionLocal
-from utils.parser import get_soup
+from utils import get_soup
 
 
 def init_db(db: Session):
@@ -11,7 +11,9 @@ def init_db(db: Session):
     names = soup.find_all('td', style='font-size:large;vertical-align:middle;')
     for i in range(len(names)):
         title = rates[i]['title'].replace('  биржи - графики обмена', '')
-        short_title = names[i].text.replace(title, '')
+        short_title = names[i].text.replace(title, '').replace(' ', '')
+        if short_title == '':
+            short_title = title
         rate = float(rates[i].text[2:].replace(',', ''))
         cur = Currency(
             title=title,
@@ -23,7 +25,7 @@ def init_db(db: Session):
 
 
 if __name__ == '__main__':
-    print('Creating initial data')
     db = SessionLocal()
+    print('Creating initial data')
     init_db(db)
     print("Initial data created")
