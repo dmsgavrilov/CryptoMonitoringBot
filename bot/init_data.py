@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from db.models import Currency
-from db.base import SessionLocal
-from utils import get_soup
+from bot.db.models import Currency
+from bot.db.base import SessionLocal
+from bot.utils import get_soup
 
 
 def init_db(db: Session):
@@ -16,8 +16,8 @@ def init_db(db: Session):
             short_title = title
         rate = float(rates[i].text[2:].replace(',', ''))
         cur = Currency(
-            title=title,
-            short_title=short_title,
+            title=title.lower(),
+            short_title=short_title.lower(),
             rate=rate
         )
         db.add(cur)
