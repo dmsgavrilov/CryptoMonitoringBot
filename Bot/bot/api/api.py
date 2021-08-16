@@ -59,7 +59,7 @@ async def get_currencies(message: types.Message):
     if currencies == []:
         message_text = 'Пока ничего не отслеживается'
     else:
-        message_text = f'Отсеживаемые валюты:\n'
+        message_text = f'Отслеживаемые валюты:\n'
         for currency in currencies:
             message_text += f'{currency.title} - {currency.rate}$\n'
     await bot.send_message(

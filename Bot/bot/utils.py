@@ -90,9 +90,9 @@ async def update_rates(db: Session, interval: int = 600) -> None:
                 continue
             change = (rate - currency.rate) / currency.rate
             if abs(change) >= settings.PERCENT_CHANGE:
+                await notify_users(currency, rate - currency.rate)
                 currency.rate = rate
                 db.commit()
-                await notify_users(currency, rate - currency.rate)
 
 
 if __name__ == '__main__':
